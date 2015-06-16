@@ -21,7 +21,7 @@ repositories {
     maven{
         url("http://repo.spring.io/snapshot")
     }
-    //    mavenCentral()
+    mavenCentral()
 }
 
 sourceCompatibility = 1.8
@@ -38,6 +38,9 @@ dependencies {
     //    compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
     //    testCompile("junit:junit")
+    compile("org.springframework:spring-context:4.1.0.BUILD-SNAPSHOT")
+    compile("org.springframework:spring-jms:4.1.0.BUILD-SNAPSHOT")
+    compile("org.apache.activemq:activemq-broker:5.11.1")
 }
 
 task wrapper(type: Wrapper) {
