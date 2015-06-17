@@ -11,6 +11,7 @@ import javax.jms.Message;
 import javax.jms.Session;
 import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.listener.adapter.JmsResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,21 +19,20 @@ public class ExampleListener {
 
     private final AtomicInteger counter = new AtomicInteger();
 
-    @JmsListener(destination = "INBOUND")
-    public Message inbound(Message message, Session s) throws JMSException {
-        String dst = "D" + (1 + counter.incrementAndGet() % 3);
-        System.out.println("sent to: " + dst);
-        message.setJMSReplyTo(new ActiveMQQueue(dst));
-        return s.createTextMessage("What a beautiful world!");
-    }
-
-//    JmsResponse NOT YET avaiable
 //    @JmsListener(destination = "INBOUND")
-//    public JmsResponse inbound(Message message, Session s) throws JMSException {
+//    public Message inbound(Message message, Session s) throws JMSException {
 //        String dst = "D" + (1 + counter.incrementAndGet() % 3);
 //        System.out.println("sent to: " + dst);
-//        return JmsResponse.forQueue(s.createTextMessage("What a beautiful world!"), dst);
+//        message.setJMSReplyTo(new ActiveMQQueue(dst));
+//        return s.createTextMessage("What a beautiful world!");
 //    }
+
+    @JmsListener(destination = "INBOUND")
+    public JmsResponse inbound(Message message, Session s) throws JMSException {
+        String dst = "D" + (1 + counter.incrementAndGet() % 3);
+        System.out.println("sent to: " + dst);
+        return JmsResponse.forQueue(s.createTextMessage("What a beautiful world!"), dst);
+    }
     
     @JmsListener(destination = "D1")
     public void d1(Message message) {

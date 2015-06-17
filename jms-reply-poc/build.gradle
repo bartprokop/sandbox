@@ -11,8 +11,8 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework:spring-context:4.1.0.BUILD-SNAPSHOT")
-    compile("org.springframework:spring-jms:4.1.0.BUILD-SNAPSHOT")
+    compile("org.springframework:spring-context:4.2.0.BUILD-SNAPSHOT")
+    compile("org.springframework:spring-jms:4.2.0.BUILD-SNAPSHOT")
     compile("org.apache.activemq:activemq-broker:5.11.1")
 }
 
